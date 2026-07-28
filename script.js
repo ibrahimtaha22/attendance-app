@@ -127,61 +127,27 @@ function saveData() {
 
 function loadData() {
 
-  const data = JSON.parse(
-    localStorage.getItem("attendance-data")
-  );
+  const dayNumber = index + 1;
 
-  if (!data) return;
+btn.textContent = dayNumber;
 
-  document.querySelectorAll(".employee").forEach((employee, i) => {
+btn.classList.remove("present", "absent", "vacation");
 
-    const days = employee.querySelectorAll(".day");
+switch (state) {
+  case "1":
+    btn.classList.add("present");
+    btn.textContent = "✅";
+    break;
 
-    data[i]?.forEach((state, index) => {
+  case "2":
+    btn.classList.add("absent");
+    btn.textContent = "❌";
+    break;
 
-      const btn = days[index];
-
-      btn.dataset.state = state;
-
-      btn.classList.remove("present", "absent", "vacation");
-
-      if (state === "1") {
-        btn.classList.add("present");
-        btn.textContent = "✅";
-      }
-
-      if (state === "2") {
-        btn.classList.add("absent");
-        btn.textContent = "❌";
-      }
-
-      if (state === "3") {
-        btn.classList.add("vacation");
-        btn.textContent = "🟡";
-      }
-
-    });
-
-    updateSummary(
-      employee.querySelector(".days"),
-      employee.querySelector(".presentCount"),
-      employee.querySelector(".absentCount"),
-      employee.querySelector(".vacationCount")
-    );
-
-  });
-
+  case "3":
+    btn.classList.add("vacation");
+    btn.textContent = "🟡";
+    break;
 }
-
-document
-  .getElementById("clearBtn")
-  .addEventListener("click", () => {
-
-    if (!confirm("مسح جميع البيانات؟")) return;
-
-    localStorage.clear();
-    location.reload();
-
-  });
 
 loadData();
