@@ -41,36 +41,36 @@ for (let i = 0; i < EMPLOYEE_COUNT; i++) {
 function changeState(button) {
   let state = Number(button.dataset.state);
 
-  state++;
-
-  if (state > 3) state = 0;
+  state = (state + 1) % 4;
 
   button.dataset.state = state;
 
   button.classList.remove("present", "absent", "vacation");
 
-  if (state === 1) {
-    button.classList.add("present");
-    button.textContent = "✅";
-  }
+  const dayNumber =
+    [...button.parentElement.children].indexOf(button) + 1;
 
-  else if (state === 2) {
-    button.classList.add("absent");
-    button.textContent = "❌";
-  }
+  switch (state) {
+    case 0:
+      button.textContent = dayNumber;
+      break;
 
-  else if (state === 3) {
-    button.classList.add("vacation");
-    button.textContent = "🟡";
-  }
+    case 1:
+      button.classList.add("present");
+      button.textContent = "✅";
+      break;
 
-  else {
-    button.textContent = button.parentElement.children.length
-      ? [...button.parentElement.children].indexOf(button) + 1
-      : "";
+    case 2:
+      button.classList.add("absent");
+      button.textContent = "❌";
+      break;
+
+    case 3:
+      button.classList.add("vacation");
+      button.textContent = "🟡";
+      break;
   }
 }
-
 function updateSummary(days, present, absent, vacation) {
 
   let p = 0;
