@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>سجل الحضور الشهري</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <h1>📋 سجل الحضور الشهري</h1>
+
+    <div class="header__info">
+      <input type="text" id="company" placeholder="اسم الشركة">
+
+      <input type="text" id="department" placeholder="القسم">
+
+      <input type="month" id="month">
+    </div>
+  </header>
+
+  <main id="employees"></main>
+
+  <div class="actions">
+    <button id="saveBtn">
+      💾 حفظ
+    </button>
+
+    <button id="clearBtn">
+      🗑 مسح البيانات
+    </button>
+  </div>
+
+  <template id="employeeTemplate">
+
+    <section class="employee">
+
+      <div class="employee__header">
+
+        <input
+          class="employee__name"
+          type="text"
+          placeholder="اسم الموظف"
+        />
+
+      </div>
+
+      <div class="days"></div>
+
+      <div class="summary">
+
+        <div class="summary__item present">
+          ✅ حضور :
+          <span class="presentCount">0</span>
+        </div>
+
+        <div class="summary__item absent">
+          ❌ غياب :
+          <span class="absentCount">0</span>
+        </div>
+
+        <div class="summary__item vacation">
+          🟡 إجازة :
+          <span class="vacationCount">0</span>
+        </div>
+
+      </div>
+
+    </section>
+
+  </template>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
