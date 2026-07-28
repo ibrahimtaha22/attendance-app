@@ -127,27 +127,57 @@ function saveData() {
 
 function loadData() {
 
-  const dayNumber = index + 1;
+  const data = JSON.parse(localStorage.getItem("attendance-data"));
 
-btn.textContent = dayNumber;
+  if (!data) return;
 
-btn.classList.remove("present", "absent", "vacation");
+  document.querySelectorAll(".employee").forEach((employee, i) => {
 
-switch (state) {
-  case "1":
-    btn.classList.add("present");
-    btn.textContent = "✅";
-    break;
+    const days = employee.querySelectorAll(".day");
 
-  case "2":
-    btn.classList.add("absent");
-    btn.textContent = "❌";
-    break;
+    data[i]?.forEach((state, index) => {
 
-  case "3":
-    btn.classList.add("vacation");
-    btn.textContent = "🟡";
-    break;
+      const btn = days[index];
+
+      btn.dataset.state = state;
+
+      btn.classList.remove("present", "absent", "vacation");
+
+      const dayNumber = index + 1;
+
+      switch (state) {
+
+        case "1":
+          btn.classList.add("present");
+          btn.textContent = "✅";
+          break;
+
+        case "2":
+          btn.classList.add("absent");
+          btn.textContent = "❌";
+          break;
+
+        case "3":
+          btn.classList.add("vacation");
+          btn.textContent = "🟡";
+          break;
+
+        default:
+          btn.textContent = dayNumber;
+      }
+
+    });
+
+    updateSummary(
+      employee.querySelector(".days"),
+      employee.querySelector(".presentCount"),
+      employee.querySelector(".absentCount"),
+      employee.querySelector(".vacationCount")
+    );
+
+  });
+
 }
 
 loadData();
+    
