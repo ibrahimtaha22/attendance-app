@@ -6,9 +6,10 @@
 }
 
 body {
-  background: #f3f5f7;
-  color: #222;
-  padding: 20px;
+    background: #f3f5f7;
+    color: #222;
+    padding: 20px;
+    zoom: 1.2; 
 }
 
 .header {
